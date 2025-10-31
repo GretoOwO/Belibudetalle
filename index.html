@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Belibu 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #ffa502, #ff6348);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 10s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 5px solid #ff6b9d;
+            position: relative;
+            animation: pageAppear 1s ease;
+            overflow: hidden;
+        }
+
+        @keyframes pageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        h1 {
+            color: #c44569;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            animation: titlePulse 2s ease infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: justify;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gif-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 5px solid #ffa502;
+        }
+
+        .signature {
+            text-align: right;
+            font-size: 1.5em;
+            color: #c44569;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .decorative-element {
+            font-size: 3em;
+            text-align: center;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .rainbow-text {
+            background: linear-gradient(90deg, #ff6b9d, #c44569, #ffa502, #ff6348, #ff6b9d);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowMove 3s linear infinite;
+            font-weight: bold;
+        }
+
+        @keyframes rainbowMove {
+            to { background-position: 200% center; }
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkleAnimation 1.5s infinite;
+        }
+
+        @keyframes sparkleAnimation {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 107, 157, 0.9);
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 107, 157, 1);
+        }
+
+        .audio-control span {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .page {
+                padding: 30px 20px;
+                border-width: 3px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 1em;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .gif-container img {
+                max-height: 250px;
+                border-width: 3px;
+            }
+
+            .signature {
+                font-size: 1.2em;
+                margin-top: 30px;
+            }
+
+            .decorative-element {
+                font-size: 2em;
+            }
+
+            .heart {
+                font-size: 20px;
+            }
+
+            .audio-control {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px;
+            }
+
+            .audio-control span {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                padding: 20px 15px;
+                margin-bottom: 30px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+
+            .gif-container img {
+                max-height: 200px;
+            }
+
+            .signature {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundMusic" loop>
+        <source src="Song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="audio-control" id="audioControl" onclick="toggleMusic()">
+        <span id="audioIcon">🔊</span>
+    </div>
+
+    <div class="stars" id="starsContainer"></div>
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <div class="container">
+        <!-- Página 1: Portada -->
+        <div class="page">
+            <h1>Para Belibu</h1>
+            <div class="gif-container">
+                <img src="abrazo.gif" alt="Abrazo">
+            </div>
+            <p style="text-align: center; font-size: 1.3em; color: #c44569;">
+                Una carta especial para una persona <span class="rainbow-text">extraordinaria</span>
+            </p>
+        </div>
+
+        <!-- Página 2: Inicio de la carta -->
+        <div class="page">
+            <h1>Hola Belibu</h1>
+            <div class="gif-container">
+                <img src="Estudiando.gif" alt="Estudiando">
+            </div>
+            <p>
+                Sé que esto puede sonar un poco raro viniendo de mí, pero necesito decírtelo de una vez por todas: <span class="rainbow-text">gracias</span>.
+            </p>
+            <p>
+                Gracias por existir, por ser como eres, y por estar ahí, aunque a veces ni siquiera te des cuenta de lo mucho que tu presencia marca la diferencia.
+            </p>
+        </div>
+
+        <!-- Página 3: Trabajadora -->
+        <div class="page">
+            <h1>Tu Fuerza Me Inspira</h1>
+            <div class="gif-container">
+                <img src="estudiar 2.0.gif" alt="Estudiando juntos">
+            </div>
+            <p>
+                La verdad, no conozco a nadie tan trabajadora como tú. En serio, no exagero: te sacas la mierda en todo lo que hacés, y lo hacés con una actitud que da envidia (la buena, la que te hace querer ser mejor).
+            </p>
+            <p>
+                Me inspira verte luchar, seguir adelante, y no rendirte ni aunque el mundo se ponga pesado. Eso es algo que admiro muchísimo, y que me hace querer esforzarme más, incluso en cosas que no tienen nada que ver contigo... pero que sí tienen tu energía de fondo.
+            </p>
+        </div>
+
+        <!-- Página 4: Humor -->
+        <div class="page">
+            <h1>Tu Risa Es Mágica</h1>
+            <div class="gif-container">
+                <img src="Riendose.gif" alt="Riendo juntos">
+            </div>
+            <p>
+                Y aparte de eso, tu humor... OMG Cada vez que nos reímos juntos, siento que el mundo se vuelve más liviano. No importa si estoy tenso, triste o en modo robot, siempre lográs sacarme una sonrisa, muchas veces sin siquiera intentarlo.
+            </p>
+            <p>
+                De hecho, hay días malos en los que me acuerdo de algo que dijiste o de alguna tontería que hiciste, y me pongo a reír solo, como un loco. En serio, tus risas son como un antídoto contra la mierda de la vida.
+            </p>
+        </div>
+
+        <!-- Página 5: Fuerza y nobleza -->
+        <div class="page">
+            <h1>Tu Corazón Noble</h1>
+            <div class="gif-container">
+                <img src="abrazogradeccer.gif" alt="Abrazo de amor">
+            </div>
+            <p>
+                También quiero decirte que cuando me contaste lo de tu relación pasada... me dolió muchísimo escucharlo. No porque fuera tu historia, sino porque alguien pudo tenerte y no valorarte como te merecés.
+            </p>
+            <p>
+                Vos das todo, con el corazón abierto, y aun así seguís siendo capaz de ver lo bueno en los demás. Eso no es solo nobleza... es <span class="rainbow-text">fuerza pura</span>. Y gracias a eso, entendí mejor cómo sos en el amor, en la amistad, en todo. Me enseñaste sin querer.
+            </p>
+        </div>
+
+        <!-- Página 6: Agradecer -->
+        <div class="page">
+            <h1>Gracias Por Ser Tú</h1>
+            <div class="gif-container">
+                <img src="Graciasporsertu.gif" alt="Gracias">
+            </div>
+            <p>
+                Hay veces que me paso de directo, me escuchás, me bancás, y no me guardás rencor. Eso también es algo que no todo el mundo hace, y que yo no doy por sentado.
+            </p>
+            <p>
+                Hablando de competitivo... tu fuerza de voluntad me impresiona. A veces ni siquiera hablamos de eso, pero veo cómo te esforzás, cómo te levantás después de caer, cómo no te rendís aunque las cosas estén difíciles. Y eso, aunque sea de forma indirecta, me empuja a no aflojar yo tampoco.
+            </p>
+        </div>
+
+        <!-- Página 7: Recuerdos -->
+        <div class="page">
+            <h1>Momentos Inolvidables</h1>
+            <div class="gif-container">
+                <img src="Momentos inovidables.gif" alt="Momentos especiales">
+            </div>
+            <p>
+                Y por último... esos momentos jugando Minecraft o Roblox, aunque parezcan bobadas, los tengo guardados como tesoros. Porque no era solo jugar: era reírnos, armar el desastre, decir cualquier cosa, y sentir que todo estaba bien.
+            </p>
+            <p>
+                Esos ratos los voy a recordar siempre. De verdad.
+            </p>
+        </div>
+
+        <!-- Página 8: Cierre -->
+        <div class="page">
+            <h1>Así Que... Gracias</h1>
+            <div class="gif-container">
+                <img src="Descartado.gif" alt="Momento especial">
+            </div>
+            <p style="text-align: center; font-size: 1.3em;">
+                <span class="rainbow-text">Gracias por ser tan vos.</span>
+            </p>
+            <p style="text-align: center; font-size: 1.3em;">
+                Gracias por reír, por luchar, por aguantarme, por brillar sin darte cuenta.
+            </p>
+            <p style="text-align: center; font-size: 1.3em;">
+                Y sobre todo, gracias por ser una persona que hace que el mundo, y mi mundo, sea un poco más bonito.
+            </p>
+            <div class="gif-container">
+                <img src="admiracion.gif" alt="Admiración final">
+            </div>
+            <div class="signature">
+                Con todo mi cariño
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let musicPlaying = false;
+        let audioInitialized = false;
+        const music = document.getElementById('backgroundMusic');
+        const audioIcon = document.getElementById('audioIcon');
+        
+        // Configurar volumen bajo
+        music.volume = 0.2;
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                audioIcon.textContent = '🔇';
+                musicPlaying = false;
+            } else {
+                const playPromise = music.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        audioIcon.textContent = '🔊';
+                        musicPlaying = true;
+                    }).catch(e => {
+                        console.log('No se pudo reproducir:', e);
+                        audioIcon.textContent = '🔇';
+                    });
+                }
+            }
+        }
+
+        // Iniciar música con el primer clic del usuario
+        function initAudio() {
+            if (!audioInitialized) {
+                audioInitialized = true;
+                const playPromise = music.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        musicPlaying = true;
+                        audioIcon.textContent = '🔊';
+                    }).catch(e => {
+                        console.log('Haz clic en el botón para activar la música');
+                    });
+                }
+            }
+        }
+
+        // Esperar interacción del usuario
+        document.body.addEventListener('click', initAudio, { once: true });
+
+        // Crear estrellas
+        const starsContainer = document.getElementById('starsContainer');
+        const starCount = window.innerWidth < 768 ? 30 : 50;
+        
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Crear corazones flotantes
+        const heartsContainer = document.getElementById('heartsContainer');
+        const heartEmojis = ['💖', '💕', '💗', '💓', '💝'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 13000);
+        }
+
+        const heartInterval = window.innerWidth < 768 ? 800 : 500;
+        setInterval(createHeart, heartInterval);
+        
+        // Crear algunos corazones iniciales
+        const initialHearts = window.innerWidth < 768 ? 5 : 10;
+        for (let i = 0; i < initialHearts; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+    </script>
+</body>
+</html>
